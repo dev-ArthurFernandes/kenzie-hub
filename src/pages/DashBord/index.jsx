@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import { NavBar } from "../../components/NavBar"
 import { api } from "../../services/api"
-import { Container } from "../../styles/Container"
-import { StyledHeader } from "../../styles/HeaderStyle"
-import { Main } from "../../styles/Main"
+import { StyledHeader } from "../../styles/HeaderStyle.js"
+import { Main } from "../../styles/Main.js"
 
 export const DashBord = () => {
 

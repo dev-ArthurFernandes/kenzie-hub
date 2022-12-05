@@ -5,10 +5,8 @@ import { StyledForm } from "../../styles/FormStyle.js";
 import { Input } from "../Inputs";
 import { Link } from "../Links";
 import { StyledButton } from "../Buttons/style.js";
-import { api } from "../../services/api"
+import { api } from "../../services/api.js"
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 
 export const LoginForm = () => {
   const navigate = useNavigate()

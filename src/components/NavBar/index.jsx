@@ -1,8 +1,7 @@
 import { Container } from "../../styles/Container.js";
 import { Logo } from "../Logo";
-import { StyledNavBar } from "./style";
-import { Button } from "../Buttons/index.jsx";
-import { Link } from "../Links/index.jsx";
+import { StyledNavBar } from "./style.js";
+import { Link } from "../Links";
 
 export const NavBar = () => {
   function Return() {
@@ -13,7 +12,7 @@ export const NavBar = () => {
     <StyledNavBar>
       <Container>
         <Logo />
-        <Link link={'/'} text={"Sair"} style={'Cem'}/>
+        <Link link={'/'} text={"Sair"} style={'Cem'} />
       </Container>
     </StyledNavBar>
   );

@@ -1,5 +1,4 @@
-import { Link as Ancora } from "react-router-dom";
-import { StyledLink } from "./style";
+import { StyledLink } from "./style.js";
 
 export const Link = ({ link, text, style }) => {
   return (

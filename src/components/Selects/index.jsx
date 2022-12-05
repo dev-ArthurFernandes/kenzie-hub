@@ -1,4 +1,4 @@
-import StyledSelect from "./style"
+import StyledSelect from "./style.js"
 
 export const Select = ({ name, text, children, register }) => {
   return (
