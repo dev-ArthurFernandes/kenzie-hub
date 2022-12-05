@@ -9,13 +9,12 @@ export const DashBord = () => {
   const [user, setUser] = useState([])
 
   const token = window.localStorage.getItem("@KenzieHub:Token")
-  console.log(token)
 
   useEffect(() => {
 
     return async () => {
-      const response = await api.get('/profile', { headers: { "Authorization": `Bearer ${token}` } })
-      setUser(response.data)
+      await api.get('/profile', { headers: { "Authorization": `Bearer ${token}` } }).then(resp => setUser(resp.data))
+
     };
   }, []);
 
