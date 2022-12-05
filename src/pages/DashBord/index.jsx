@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { NavBar } from "../../components/NavBar"
-import { api } from "../../services/api"
+import { api } from "../../services/api.js"
 import { StyledHeader } from "../../styles/HeaderStyle.js"
 import { Main } from "../../styles/Main.js"
 

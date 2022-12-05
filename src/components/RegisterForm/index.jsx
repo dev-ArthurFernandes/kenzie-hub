@@ -6,10 +6,9 @@ import { StyledButton } from "../Buttons/style.js";
 import { Input } from "../Inputs";
 import { StyledErrorMensage } from "../../styles/ErrorMessage.js";
 import { BiErrorAlt } from 'react-icons/bi';
-import { api } from "../../services/api";
+import { api } from "../../services/api.js";
 import { Select } from "../Selects";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export const RegisterForm = () => {
 
