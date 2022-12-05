@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
 import * as yup from "yup";
 import { StyledForm } from "../../styles/FormStyle.js"
 import { Input } from "../Inputs"
@@ -9,6 +8,7 @@ import { StyledErrorMensage } from "../../styles/ErrorMessage.js"
 import { BiErrorAlt } from "react-icons/bi"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { api } from "../../services/api.js"
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
