@@ -8,8 +8,6 @@ import { StyledErrorMensage } from "../../styles/ErrorMessage.js"
 import { BiErrorAlt } from "react-icons/bi"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { api } from "../../services/api.js"
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 export const RegisterForm = () => {
@@ -36,16 +34,7 @@ export const RegisterForm = () => {
 
     await api.post("/users", data).then(resp => {
       if (resp.status !== 404) {
-        toast.success("Cadastro efetuado com sucesso!", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        })
+        alert('Cadastro feito com sucesso!')
       }
     }).catch(error => console.error(error))
 
@@ -104,7 +93,6 @@ export const RegisterForm = () => {
           {errors.password && <p>{errors.password.message}</p>}
         </StyledErrorMensage> : <></>
       }
-      <ToastContainer />
     </StyledForm>
   );
 };
