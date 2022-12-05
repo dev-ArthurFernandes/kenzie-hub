@@ -1,12 +1,13 @@
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { StyledForm } from "../../styles/FormStyle.js";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { api } from "../../services/api";
+import { StyledForm } from "../../styles/FormStyle";
+import { StyledButton } from "../Buttons/style";
 import { Input } from "../Inputs";
 import { Link } from "../Links";
-import { StyledButton } from "../Buttons/style.js";
-import { api } from "../../services/api.js"
-import { useNavigate } from "react-router-dom";
+
 
 export const LoginForm = () => {
   const navigate = useNavigate()
@@ -62,7 +63,6 @@ export const LoginForm = () => {
       </StyledButton>
       <p>Ainda não possui conta?</p>
       <Link link={"/register"} text={"Cadastre-se"} className="Cem" />
-      <ToastContainer />
     </StyledForm>
 
   );

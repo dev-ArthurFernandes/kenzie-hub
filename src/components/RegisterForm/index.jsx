@@ -1,14 +1,15 @@
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { StyledForm } from "../../styles/FormStyle.js";
-import { StyledButton } from "../Buttons/style.js";
-import { Input } from "../Inputs";
-import { StyledErrorMensage } from "../../styles/ErrorMessage.js";
-import { BiErrorAlt } from 'react-icons/bi';
-import { api } from "../../services/api.js";
-import { Select } from "../Selects";
 import { toast, ToastContainer } from "react-toastify";
+import * as yup from "yup";
+import { StyledForm } from "../../styles/FormStyle.js"
+import { Input } from "../Inputs"
+import { Select } from "../Selects"
+import { StyledButton } from "../Buttons"
+import { StyledErrorMensage } from "../../styles/ErrorMessage.js"
+import { BiErrorAlt } from "react-icons/bi"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { api } from "../../services/api.js"
+
 
 export const RegisterForm = () => {
 
