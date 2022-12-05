@@ -1,4 +1,4 @@
-import { StyledButton } from "./style";
+import { StyledButton } from "./style.js";
 
 export const Button = ({ style, children, callback }) => {
   return (

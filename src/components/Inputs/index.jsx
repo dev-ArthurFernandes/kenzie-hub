@@ -1,4 +1,3 @@
-import React from "react";
 import { StyledInput } from "./style.js";
 
 export const Input = ({ text, register, placeholder, name }) => {
