@@ -9,6 +9,7 @@ import { StyledErrorMensage } from "../../styles/ErrorMessage.js"
 import { BiErrorAlt } from "react-icons/bi"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { api } from "../../services/api.js"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const RegisterForm = () => {
