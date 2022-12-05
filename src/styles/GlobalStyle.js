@@ -1,10 +1,9 @@
-import createGlobalStyle from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
   :root{
-    //colors
-    
+  //colors
+  
     --color-primary: #ff577f;
     --color-primary-Focus: #ff427f;
     --color-primary-Negative: #59323f;
@@ -22,18 +21,23 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
     font-weight: 500;
-    
 
-    //reset
+    color: var(--color-grey-0);
 
-    *{
+    background-color: var(--color-grey-4)
+  }
+
+  *{
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       list-style: none;
       text-decoration: none;
     }
-  }
+
+    .Cem{
+      width: 100%;
+    }
 `;
 
 export default GlobalStyle;
