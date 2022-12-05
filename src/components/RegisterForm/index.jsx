@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { StyledForm } from "../../styles/FormStyle.js"
 import { Input } from "../Inputs"
 import { Select } from "../Selects"
-import { StyledButton } from "../Buttons"
+import { StyledButton } from "../Buttons/style.js"
 import { StyledErrorMensage } from "../../styles/ErrorMessage.js"
 import { BiErrorAlt } from "react-icons/bi"
 import { yupResolver } from "@hookform/resolvers/yup"
