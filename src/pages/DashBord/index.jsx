@@ -12,10 +12,15 @@ export const DashBord = () => {
 
   useEffect(() => {
 
-    return async () => {
-      await api.get('/profile', { headers: { "Authorization": `Bearer ${token}` } }).then(resp => setUser(resp.data))
-
-    };
+    const response = async () => {
+      try {
+        const resp = await api.get('/profile', { headers: { "Authorization": `Bearer ${token}` } })
+        setUser(resp.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    response()
   }, []);
 
   return (
