@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { api } from "../../services/api.js"
 
 
-export const RegisterForm = () => {
+export const RegisterForm = ({setnotify, setmessage}) => {
 
   const RegisterSharp = yup.object().shape({
     email: yup.string().required("O email é obrigatóiro").email("Você deve passar um email valido"),
@@ -33,10 +33,16 @@ export const RegisterForm = () => {
     console.log(data)
 
     await api.post("/users", data).then(resp => {
-      if (resp.status !== 404) {
-        alert('Cadastro feito com sucesso!')
+      setmessage({text: "Cadastro efetuado com sucesso!", type: "success"})
+      setnotify(true)
+      setTimeout(() => setnotify(false), 3000)
+    }).catch(error => {
+      if (error.response.status === 401){
+        setmessage({text: "O email já existe...", type: "atention"})
+        setnotify(true)
+        setTimeout(() => setnotify(false), 3000)
       }
-    }).catch(error => console.error(error))
+    })
 
   };
 
@@ -86,11 +92,13 @@ export const RegisterForm = () => {
       </Select>
       <StyledButton className="Primary Cem">Cadastrar</StyledButton>
       {
-        errors.email || errors.name || errors.password ? <StyledErrorMensage>
+        errors.email || errors.name || errors.password || errors.bio || errors.contact ? <StyledErrorMensage>
           <BiErrorAlt />
           {errors.email && <p>{errors.email.message}</p>}
           {errors.name && <p>{errors.name.message}</p>}
           {errors.password && <p>{errors.password.message}</p>}
+          {errors.bio && <p>{errors.bio.message}</p>}
+          {errors.contact && <p>{errors.contact.message}</p>}
         </StyledErrorMensage> : <></>
       }
     </StyledForm>

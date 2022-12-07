@@ -9,9 +9,8 @@ import { Input } from "../Inputs";
 import { Link } from "../Links";
 
 
-export const LoginForm = () => {
+export const LoginForm = ({setNotify, setMessage}) => {
   const navigate = useNavigate()
-
 
   const sharp = yup.object().shape({
     email: yup.string().required("O email é obrigatório"),
@@ -31,13 +30,16 @@ export const LoginForm = () => {
     console.log(data)
     await api.post("/sessions", data)
       .then(resp => {
-        if (resp.status === 200) {
-          window.localStorage.clear()
-          window.localStorage.setItem('@KenzieHub:Token', resp.data.token)
-          navigate('/dashbord')
-        }
+        window.localStorage.clear()
+        window.localStorage.setItem('@KenzieHub:Token', resp.data.token)
+        navigate('/dashbord')
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        setMessage({text: err.response.data.message[0], type: err.response.data.status})
+        setNotify(true)
+        setTimeout(() => setNotify(false), 3000)
+      })
+
   };
 
   return (
