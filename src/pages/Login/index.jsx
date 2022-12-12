@@ -1,21 +1,28 @@
+import { useContext } from "react";
 import { LoginForm } from "../../components/LoginForm";
 import { Logo } from "../../components/Logo";
 import { Toast } from "../../components/MyToast";
+import { userContext } from "../../providers/userContext";
 import { Main } from "../../styles/Main.js";
-import { useState } from "react"
 
 export const Login = () => {
-  const [notify, setNotify] = useState(null); 
-  const [message, setMessage] = useState({});
-  console.log(message)
-  console.log(notify)
+
+  const {token, loading} = useContext(userContext);
+
+  if(token){
+
+  }
+
   return (
     <>
+    {
+      loading ? <Loading/> : 
       <Main>
         <Logo />
-        <LoginForm setNotify={setNotify} setMessage={setMessage}/>
-        {notify && <Toast type={message.type} text={message.text}/>}
+        <LoginForm />
+        {/* {notify && <Toast type={message.type} text={message.text}/>} */}
       </Main>
+    }
     </>
   );
 };

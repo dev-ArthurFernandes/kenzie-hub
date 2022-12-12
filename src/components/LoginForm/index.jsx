@@ -9,7 +9,7 @@ import { Input } from "../Inputs";
 import { Link } from "../Links";
 
 
-export const LoginForm = ({setNotify, setMessage}) => {
+export const LoginForm = () => {
   const navigate = useNavigate()
 
   const sharp = yup.object().shape({
