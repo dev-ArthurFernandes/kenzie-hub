@@ -4,15 +4,11 @@ import { Logo } from "../../components/Logo";
 import { Toast } from "../../components/MyToast";
 import { userContext } from "../../providers/userContext";
 import { Main } from "../../styles/Main.js";
+import { Loading } from "../../components/Loading";
 
 export const Login = () => {
-
-  const {token, loading} = useContext(userContext);
-
-  if(token){
-
-  }
-
+  const {loading, notify} = useContext(userContext);
+  
   return (
     <>
     {
@@ -20,7 +16,7 @@ export const Login = () => {
       <Main>
         <Logo />
         <LoginForm />
-        {/* {notify && <Toast type={message.type} text={message.text}/>} */}
+        {notify && <Toast type={message.type} text={message.text}/>}
       </Main>
     }
     </>

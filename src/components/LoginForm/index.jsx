@@ -2,15 +2,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { userContext } from "../../providers/userContext";
 import { api } from "../../services/api";
 import { StyledForm } from "../../styles/FormStyle";
 import { StyledButton } from "../Buttons/style";
 import { Input } from "../Inputs";
 import { Link } from "../Links";
-
+import { useContext } from "react";
 
 export const LoginForm = () => {
   const navigate = useNavigate()
+
+  const {setUser, setLoading, setNotify, setMessage, setToken} = useContext(userContext)
 
   const sharp = yup.object().shape({
     email: yup.string().required("O email é obrigatório"),
@@ -27,19 +30,23 @@ export const LoginForm = () => {
   });
 
   const sendLogin = async (data) => {
-    console.log(data)
-    await api.post("/sessions", data)
-      .then(resp => {
-        window.localStorage.clear()
-        window.localStorage.setItem('@KenzieHub:Token', resp.data.token)
-        navigate('/dashbord')
-      })
-      .catch(err => {
-        setMessage({text: err.response.data.message[0], type: err.response.data.status})
-        setNotify(true)
-        setTimeout(() => setNotify(false), 3000)
-      })
-
+    setLoading(true)
+    
+    try{
+      const resp = await api.post("/sessions", data)
+      window.localStorage.clear()
+      window.localStorage.setItem('@KenzieHub:Token', resp.data.token)
+      window.localStorage.setItem("@KenzieHub:UserId", resp.data.user.id)
+      setUser(resp.data.user)
+      setToken(resp.data.token)
+      setLoading(false)
+      navigate('/dashbord')
+    }catch(err){
+      console.log(err)
+      setMessage({text: err.response.data.message[0], type: err.response.data.status})
+      setNotify(true)
+      setTimeout(() => setNotify(false), 3000)
+    }
   };
 
   return (

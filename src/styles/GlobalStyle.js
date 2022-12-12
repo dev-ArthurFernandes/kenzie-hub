@@ -24,7 +24,8 @@ const GlobalStyle = createGlobalStyle`
 
     color: var(--color-grey-0);
 
-    background-color: var(--color-grey-4)
+    background-color: var(--color-grey-4);
+
   }
 
   *{
@@ -35,9 +36,9 @@ const GlobalStyle = createGlobalStyle`
       text-decoration: none;
     }
 
-    .Cem{
-      width: 100%;
-    }
+  .Cem{
+    width: 100%;
+  }
 `;
 
 export default GlobalStyle;
