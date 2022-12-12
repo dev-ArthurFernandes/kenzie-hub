@@ -39,13 +39,15 @@ export const LoginForm = () => {
       window.localStorage.setItem("@KenzieHub:UserId", resp.data.user.id)
       setUser(resp.data.user)
       setToken(resp.data.token)
-      setLoading(false)
       navigate('/dashbord')
     }catch(err){
       console.log(err)
       setMessage({text: err.response.data.message[0], type: err.response.data.status})
       setNotify(true)
-      setTimeout(() => setNotify(false), 3000)
+      setTimeout(() => setNotify(false), 6000)
+    }
+    finally{
+      setLoading(false)
     }
   };
 

@@ -7,7 +7,7 @@ import { Main } from "../../styles/Main.js";
 import { Loading } from "../../components/Loading";
 
 export const Login = () => {
-  const {loading, notify} = useContext(userContext);
+  const {loading, notify, message} = useContext(userContext);
   
   return (
     <>
