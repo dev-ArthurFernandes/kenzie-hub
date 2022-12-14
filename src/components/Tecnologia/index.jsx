@@ -3,9 +3,9 @@ import { FaRegTrashAlt } from "react-icons/fa"
 import { Button } from "../Buttons"
 
 
-export const Tecnologia = ({title, level}) => {
+export const Tecnologia = ({title, level, callback}) => {
     return(
-        <StyledTecnologiCard>
+        <StyledTecnologiCard onClick={callback}>
             <div>
                 <h2>{title}</h2>
                 <p>{level}</p>

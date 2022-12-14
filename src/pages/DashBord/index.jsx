@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavBar } from "../../components/NavBar";
 import { userContext } from "../../providers/userContext";
 import { StyledHeader } from "../../styles/HeaderStyle.js";
@@ -9,13 +9,22 @@ import { Loading } from "../../components/Loading";
 import { Container } from "../../styles/Container";
 import { Tecnologias } from "../../components/Tecnologias";
 import { Tecnologia } from "../../components/Tecnologia";
-import { useState } from "react";
+import { Modal } from "../../components/Modal"
 
 export const DashBord = () => {
 
-  const {user, loading} = useContext(userContext);
+  const {user, loading, Tech} = useContext(userContext);
 
-  const [userTech, setUserTech] = useState(user.techs)
+  const [modalCreate, setModalCreate] = useState(false);
+
+  function openModalCreate(){
+    setModalCreate(true)
+  }
+
+  function openModalEdit(){
+    setModalEdit(true)
+  }
+
   return (
     <>
       {loading ? <Loading/> : 
@@ -29,16 +38,19 @@ export const DashBord = () => {
           <Container style={{flexDirection: "column"}}>
             <div style={{width: "100%", display: "flex", justifyContent: "space-between", marginTop: "100px"}}>
               <h2>Tecnologias</h2>
-              <Button style={"Text"}><FaPlus/></Button>
+              <Button style={"Text"} callback={openModalCreate}><FaPlus/></Button>
             </div>
             <Tecnologias>
               {
-                userTech ? userTech.map((tech) => {
-                  <Tecnologia title={tech.title} level={tech.status}/>
-                }) : <h2>Você ainda não possui Tecnologias cadastradas...</h2>
+                Tech > 0 ? Tech.map((element) => {
+                  <Tecnologia title={element.title} level={element.status} callback={openModalEdit}/> 
+                }) : <h2>Você ainda não tem tecnologias cadastradas...</h2>
               }
             </Tecnologias>
           </Container>
+          {
+            modalCreate && <Modal setModal={setModalCreate} type={"create"}></Modal>
+          }
         </Main>
         </>
       }

@@ -7,7 +7,7 @@ export const StyledInput = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin: 10px;
+  /* margin: 10px; */
 
   & input {
     width: 100%;

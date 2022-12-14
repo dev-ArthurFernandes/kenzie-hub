@@ -8,13 +8,13 @@ import {AnimatePresence} from "framer-motion";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider>
        <AnimatePresence>
-        <GlobalStyle />
-        <App />
-       </AnimatePresence>
-      </BrowserRouter>
-    </Provider>
+          <GlobalStyle />
+          <App />
+        </AnimatePresence>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );

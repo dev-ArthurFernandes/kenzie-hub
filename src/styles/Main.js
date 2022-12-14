@@ -10,5 +10,7 @@ export const Main = styled.main`
 
   flex-direction: column;
 
+  position: relative;
+
   gap: 30px;
 `;
