@@ -68,7 +68,7 @@ export const StyledModal = styled.div`
     }
   }
 
-  & > div{
+  & > form{
     height: 100%;
 
     padding: 0 10px 30px 10px;
@@ -78,7 +78,5 @@ export const StyledModal = styled.div`
 
     justify-content: space-between;
     align-items: center;
-
-
   }
 `

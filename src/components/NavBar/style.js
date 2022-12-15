@@ -12,4 +12,6 @@ export const StyledNavBar = styled.nav`
   top: 0;
 
   background: transparent;
+
+  z-index: 2;
 `;

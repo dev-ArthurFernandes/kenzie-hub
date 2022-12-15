@@ -3,19 +3,22 @@ import { NavBar } from "../../components/NavBar";
 import { userContext } from "../../providers/userContext";
 import { StyledHeader } from "../../styles/HeaderStyle.js";
 import { Main } from "../../styles/Main.js";
-import {Button} from "../../components/Buttons"
-import {FaPlus} from "react-icons/fa"
+import { Button } from "../../components/Buttons"
+import { FaPlus } from "react-icons/fa"
 import { Loading } from "../../components/Loading";
 import { Container } from "../../styles/Container";
 import { Tecnologias } from "../../components/Tecnologias";
 import { Tecnologia } from "../../components/Tecnologia";
 import { Modal } from "../../components/Modal"
+import { Toast } from "../../components/MyToast";
+import { useNavigate } from "react-router-dom";
 
 export const DashBord = () => {
 
-  const {user, loading, Tech} = useContext(userContext);
+  const {user, loading, Tech, notify, message, setLoading} = useContext(userContext);
 
   const [modalCreate, setModalCreate] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
 
   function openModalCreate(){
     setModalCreate(true)
@@ -24,6 +27,28 @@ export const DashBord = () => {
   function openModalEdit(){
     setModalEdit(true)
   }
+
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    async function authLogin(){
+      try{
+        const response = await api.get("/profile", {headers: {Authorization: `Bearer ${token}`}})
+        localStorage.setItem("@KenzieHub:UserId", response.data.id)
+        setUser(response.data)
+        if(response.data.techs.length > 0){
+          setTech(response.data.techs)
+        }
+        navigate("/dashbord")
+      }catch(error){
+        localStorage.clear()
+        navigate("/")
+      }finally{
+        setLoading(false)
+      }
+    }
+    authLogin()
+  }, []);
 
   return (
     <>
@@ -42,14 +67,20 @@ export const DashBord = () => {
             </div>
             <Tecnologias>
               {
-                Tech > 0 ? Tech.map((element) => {
-                  <Tecnologia title={element.title} level={element.status} callback={openModalEdit}/> 
+                Tech ? Tech.map((element) => {
+                  return <Tecnologia title={element.title} level={element.status} callback={openModalEdit} id={element.id} key={element.id}/> 
                 }) : <h2>Você ainda não tem tecnologias cadastradas...</h2>
               }
             </Tecnologias>
           </Container>
           {
-            modalCreate && <Modal setModal={setModalCreate} type={"create"}></Modal>
+            modalCreate && <Modal setModal={setModalCreate} type={"create"}/>
+          }
+          {
+            modalEdit && <Modal setModal={setModalEdit} type={"edit"}/>
+          }
+          {
+            notify && <Toast text={message.text} type={message.type}/>
           }
         </Main>
         </>

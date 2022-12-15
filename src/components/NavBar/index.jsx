@@ -5,14 +5,14 @@ import { Link } from "../Links";
 
 export const NavBar = () => {
   function Return() {
-    console.log("Saindo...");
+    localStorage.clear()
   }
 
   return (
     <StyledNavBar>
       <Container>
         <Logo />
-        <Link link={'/'} text={"Sair"} style={'Cem'} />
+        <Link link={'/'} text={"Sair"} style={'Cem'} callback={Return}/>
       </Container>
     </StyledNavBar>
   );

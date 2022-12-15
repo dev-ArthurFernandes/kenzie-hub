@@ -16,6 +16,8 @@ export const StyledTecnologiCard = styled.li`
     align-items: center;
     background-color: var(--color-grey-4);
 
+    cursor: pointer;
+
     & div{
         width: 90%;
         display: flex;

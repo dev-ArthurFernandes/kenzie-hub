@@ -41,8 +41,8 @@ export const LoginForm = () => {
       setToken(resp.data.token)
       navigate('/dashbord')
     }catch(err){
-      console.log(err)
-      setMessage({text: err.response.data.message[0], type: err.response.data.status})
+      console.error(err)
+      setMessage({text: err.response.data.message, type: err.response.data.status})
       setNotify(true)
       setTimeout(() => setNotify(false), 6000)
     }
@@ -60,12 +60,14 @@ export const LoginForm = () => {
         placeholder={"Seu email aqui..."}
         name={"email"}
         errors={errors}
+        type={"text"}
       />
       <Input
         text={"Senha"}
         register={register("password")}
         placeholder={"Sua senha aqui..."}
         name={"password"}
+        type={"password"}
       />
       {errors.email && <p className="Errors">{errors.email.message}</p>}
       {errors.password && <p className="Errors">{errors.password.message}</p>}
