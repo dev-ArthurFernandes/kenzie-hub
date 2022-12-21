@@ -4,7 +4,7 @@ import { userContext } from "../../providers/userContext";
 import { StyledHeader } from "../../styles/HeaderStyle.js";
 import { Main } from "../../styles/Main.js";
 import { Button } from "../../components/Buttons"
-import { FaPlus } from "react-icons/fa"
+import { FaPlus, FaRegFilePowerpoint } from "react-icons/fa"
 import { Loading } from "../../components/Loading";
 import { Container } from "../../styles/Container";
 import { Tecnologias } from "../../components/Tecnologias";
@@ -12,10 +12,12 @@ import { Tecnologia } from "../../components/Tecnologia";
 import { Modal } from "../../components/Modal"
 import { Toast } from "../../components/MyToast";
 import { useNavigate } from "react-router-dom";
+import { BsFileEarmarkSpreadsheet } from "react-icons/bs";
+import { api } from "../../services/api.js";
 
 export const DashBord = () => {
 
-  const {user, loading, Tech, notify, message, setLoading} = useContext(userContext);
+  const {user, loading, Tech, notify, message, setLoading, setUser, token} = useContext(userContext);
 
   const [modalCreate, setModalCreate] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
@@ -33,6 +35,7 @@ export const DashBord = () => {
   useEffect(() => {
     async function authLogin(){
       try{
+        const token = localStorage.getItem("@KenzieHub:Token")
         const response = await api.get("/profile", {headers: {Authorization: `Bearer ${token}`}})
         localStorage.setItem("@KenzieHub:UserId", response.data.id)
         setUser(response.data)

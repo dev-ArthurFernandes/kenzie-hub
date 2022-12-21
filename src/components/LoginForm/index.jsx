@@ -31,7 +31,6 @@ export const LoginForm = () => {
 
   const sendLogin = async (data) => {
     setLoading(true)
-    
     try{
       const resp = await api.post("/sessions", data)
       window.localStorage.clear()
@@ -50,6 +49,8 @@ export const LoginForm = () => {
       setLoading(false)
     }
   };
+
+  
 
   return (
     <StyledForm noValidate onSubmit={handleSubmit(sendLogin)}>

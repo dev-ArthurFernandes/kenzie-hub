@@ -14,7 +14,7 @@ export const UserProvider = ({children}) => {
 
   const [notify, setNotify] = useState(null)
   const [message, setMessage] = useState({})
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
     return (
       <userContext.Provider value={{token, user, notify, message, setMessage, setNotify, setToken, setLoading, loading, setUser, setUserId, userId, Tech, setTech}}>

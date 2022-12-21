@@ -11,13 +11,14 @@ import { api } from '../../services/api.js';
 
 export const Register = () => {
 
-  const {loading, setLoading, notify, setUser, setTech, } = useContext(userContext)
+  const {loading, setLoading, notify, setUser, setTech, message} = useContext(userContext)
 
   const navigate = useNavigate()
   
   useEffect(() => {
     async function authLogin(){
       try{
+        const token = localStorage.getItem("@KenzieHub:Token")
         const response = await api.get("/profile", {headers: {Authorization: `Bearer ${token}`}})
         localStorage.setItem("@KenzieHub:UserId", response.data.id)
         setUser(response.data)
@@ -26,6 +27,7 @@ export const Register = () => {
         }
         navigate("/dashbord")
       }catch(error){
+        console.log(error)
         localStorage.clear()
       }finally{
         setLoading(false)
@@ -36,7 +38,6 @@ export const Register = () => {
 
   return (
     <>
-
     {loading ? <Loading/> : 
     <Main>
       <NavBar />
