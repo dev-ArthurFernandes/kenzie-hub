@@ -6,18 +6,21 @@ import { userContext } from "../../providers/userContext";
 import { Main } from "../../styles/Main.js";
 import { Loading } from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
+import { techContext } from "../../providers/techContext";
 
 export const Login = () => {
-  const {loading, notify, message, setLoading, setUser, setTech} = useContext(userContext);
+
+  const {loading, notify, message, setLoading, setUser} = useContext(userContext);
+  const { setTech } = useContext(techContext)
 
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     async function authLogin(){
       try{
         const token = localStorage.getItem("@KenzieHub:Token")
         const response = await api.get("/profile", {headers: {Authorization: `Bearer ${token}`}})
-        console.log(response)
         localStorage.setItem("@KenzieHub:UserId", response.data.id)
         setUser(response.data)
         if(response.data.techs.length > 0){
@@ -25,15 +28,17 @@ export const Login = () => {
         }
         navigate("/dashbord")
       }catch(error){
-        console.log(error)
-        // localStorage.clear()
-        // navigate("/")
+        console.error(error)
+        localStorage.clear()
+        navigate("/")
       }finally{
         setLoading(false)
       }
     }
     authLogin()
   }, []);
+
+
 
   return (
     <>

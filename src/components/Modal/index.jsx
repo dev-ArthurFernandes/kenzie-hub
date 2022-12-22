@@ -9,11 +9,13 @@ import { userContext } from "../../providers/userContext";
 import { useContext } from "react";
 import * as yup from 'yup'
 import { yupResolver } from "@hookform/resolvers/yup";
+import { techContext } from "../../providers/techContext";
 
 
-export const Modal = ({type, setModal, id}) => {
+export const Modal = async ({type, setModal, id}) => {
 
-  const {setMessage, setNotify, token, setTech} = useContext(userContext)
+  const {setMessage, setNotify, token} = useContext(userContext)
+  const { Tech, setAllState } = useContext(techContext)
 
   const formShape = yup.object().shape({
     title: yup.string(),
@@ -25,23 +27,18 @@ export const Modal = ({type, setModal, id}) => {
   })
 
   async function submitCreate(data){
+    console.log(data)
     if(type == 'create'){
       try{
-        await api.post("/users/techs", data, {headers: {Authorization: `Bearer ${token}`}}).then(resp => {
-          return resp.data
-        }).then(resp => {
-          setMessage({text: 'Tecnologia criada com sucesso!', type: 'success'})
-          setNotify(true)
-          setTimeout(() => setNotify(false), 3000)
-          setTech((old) => {
-            if(old){
-              setTech([...old, resp])
-            }else{
-              setTech([resp])
-            }
-          })
-          setModal(false)
-        })
+        console.log(Tech)
+        const resp = await api.post("/users/techs", data, {headers: {Authorization: `Bearer ${token}`}})
+        setMessage({text: 'Tecnologia criada com sucesso!', type: 'success'})
+        setNotify(true)
+        setTimeout(() => setNotify(false), 3000)
+        setAllState(token)
+        console.log(Tech)
+        setModal(false)
+        
       }catch(error){
         console.error(error);
       }
@@ -60,7 +57,6 @@ export const Modal = ({type, setModal, id}) => {
       }
     }
   }
-
 
   return(
     <StyledModalSection>

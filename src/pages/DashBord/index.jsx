@@ -14,14 +14,15 @@ import { Toast } from "../../components/MyToast";
 import { useNavigate } from "react-router-dom";
 import { BsFileEarmarkSpreadsheet } from "react-icons/bs";
 import { api } from "../../services/api.js";
+import { techContext } from "../../providers/techContext";
 
 export const DashBord = () => {
 
-  const {user, loading, Tech, notify, message, setLoading, setUser, token} = useContext(userContext);
+  const {user, loading, notify, message, setLoading, setUser} = useContext(userContext);
+  const { setTech, Tech, setAllState } = useContext(techContext)
 
   const [modalCreate, setModalCreate] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
-
   function openModalCreate(){
     setModalCreate(true)
   }
@@ -33,9 +34,9 @@ export const DashBord = () => {
   const navigate = useNavigate()
   
   useEffect(() => {
+    const token = localStorage.getItem("@KenzieHub:Token")
     async function authLogin(){
       try{
-        const token = localStorage.getItem("@KenzieHub:Token")
         const response = await api.get("/profile", {headers: {Authorization: `Bearer ${token}`}})
         localStorage.setItem("@KenzieHub:UserId", response.data.id)
         setUser(response.data)
@@ -44,6 +45,7 @@ export const DashBord = () => {
         }
         navigate("/dashbord")
       }catch(error){
+        console.error(error)
         localStorage.clear()
         navigate("/")
       }finally{
@@ -51,7 +53,10 @@ export const DashBord = () => {
       }
     }
     authLogin()
+    setAllState(token)
+
   }, []);
+  console.log(Tech)
 
   return (
     <>

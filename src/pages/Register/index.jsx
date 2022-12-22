@@ -7,11 +7,13 @@ import { userContext } from "../../providers/userContext";
 import { Loading } from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
 import { api } from '../../services/api.js';
+import { techContext } from "../../providers/techContext";
 
 
 export const Register = () => {
 
-  const {loading, setLoading, notify, setUser, setTech, message} = useContext(userContext)
+  const {loading, setLoading, notify, setUser, message} = useContext(userContext)
+  const {setTech} = useContext(techContext)
 
   const navigate = useNavigate()
   
@@ -27,8 +29,9 @@ export const Register = () => {
         }
         navigate("/dashbord")
       }catch(error){
-        console.log(error)
+        console.error(error)
         localStorage.clear()
+        navigate("/")
       }finally{
         setLoading(false)
       }

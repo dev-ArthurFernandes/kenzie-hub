@@ -3,22 +3,21 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { api } from "../../services/api.js";
 import { useContext } from "react";
 import { userContext } from "../../providers/userContext";
+import { techContext } from "../../providers/techContext";
 
 
 export const Tecnologia = ({title, level, callback, id}) => {
     
-    const {token, setMessage, setNotify, setTech} = useContext(userContext)
+    const {token, setMessage, setNotify,} = useContext(userContext)
+    const { setAllState } = useContext(techContext)
 
     async function deletTech(){
         try{
-            await api.delete(`/users/techs/${id}`, {headers: {Authorization: `Bearer ${token}`}}).then(resp => {
-                setMessage({text: "Tecnologia excluida com sucesso!", type:"success"})
-                setNotify(true)
-                setTimeout(() => setNotify(false), 3000)
-                setTech((old) => {
-                    setTech(old.filter(element => element.id !== id))
-                })
-            })
+            await api.delete(`/users/techs/${id}`, {headers: {Authorization: `Bearer ${token}`}})
+            setMessage({text: "Tecnologia excluida com sucesso!", type:"success"})
+            setNotify(true)
+            setTimeout(() => setNotify(false), 3000)
+            setAllState(token)
         }catch(error){
             console.error(error);
         }
