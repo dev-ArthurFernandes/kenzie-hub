@@ -12,7 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { techContext } from "../../providers/techContext";
 
 
-export const Modal = async ({type, setModal, id}) => {
+export const Modal = ({type, setModal, id}) => {
 
   const {setMessage, setNotify, token} = useContext(userContext)
   const { Tech, setAllState } = useContext(techContext)
@@ -51,7 +51,7 @@ export const Modal = async ({type, setModal, id}) => {
         setModal(false)
       } catch (error) {
         console.error(error)
-        setMessage({text: "Olha a me", type: 'success'})
+        setMessage({text: "Não foi possivel atualizar sua technologia", type: 'error'})
         setNotify(true)
         setTimeout(() => setNotify(false), 3000)
       }

@@ -75,7 +75,7 @@ export const DashBord = () => {
             </div>
             <Tecnologias>
               {
-                Tech ? Tech.map((element) => {
+                Tech.length > 0 ? Tech.map((element) => {
                   return <Tecnologia title={element.title} level={element.status} callback={openModalEdit} id={element.id} key={element.id}/> 
                 }) : <h2>Você ainda não tem tecnologias cadastradas...</h2>
               }
